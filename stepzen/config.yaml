@@ -1,0 +1,4 @@
+configurationset:
+  - configuration:
+      name: postgresql_config
+      uri: postgresql://ep-square-fog-a5rfmgna.us-east-2.aws.neon.tech/git-photos?user=git-photos_owner&password=SrX9NhT7VKRL
