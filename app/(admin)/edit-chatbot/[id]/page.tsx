@@ -3,7 +3,6 @@ import Avatar from "@/app/components/Avatar";
 import Characteristic from "@/app/components/Characteristic";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { BASE_URL } from "@/graphql/apolloClient";
 import {
   ADD_CHARACTERISTIC,
   DELETE_CHATBOT,
@@ -29,9 +28,9 @@ function EditChatbot({ params: { id } }: { params: { id: string } }) {
   const [addCharacteristic] = useMutation(ADD_CHARACTERISTIC, {
     refetchQueries: ["GetChatbotById"],
   });
-  const [updateChatebot] = useMutation(UPDATE_CHATBOT,{
+  const [updateChatebot] = useMutation(UPDATE_CHATBOT, {
     refetchQueries: ["GetChatbotById"],
-  })
+  });
   const { data, loading, error } = useQuery<
     GetChatbotByIdResponse,
     GetChatbotByIdVariables
@@ -45,7 +44,7 @@ function EditChatbot({ params: { id } }: { params: { id: string } }) {
     }
   }, [data]);
   useEffect(() => {
-    const url = `${BASE_URL}chatbot/${id}`;
+    const url = `http://localhost:3000/chatbot/${id}`;
     setUrl(url);
   }, [id]);
   const handleAddCharacteristic = async (content: string) => {
@@ -66,24 +65,24 @@ function EditChatbot({ params: { id } }: { params: { id: string } }) {
       console.log("Failed to add Characteristic", error);
     }
   };
-  const handleUpdateChatbot = async(e: FormEvent<HTMLFormElement>)=>{
+  const handleUpdateChatbot = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const promise = updateChatebot({
-        variables:{
+        variables: {
           id,
-          name:chatbotName
-        }
-      })
-      toast.promise(promise,{
+          name: chatbotName,
+        },
+      });
+      toast.promise(promise, {
         loading: "Updating...",
         success: "Chatbot name Successfully updated",
         error: "Failed to upadte chatbot",
-      })
+      });
     } catch (error) {
       console.log("Failed to update chatbot", error);
     }
-  }
+  };
 
   const handleDelete = async (id: string) => {
     const isConfirmed = window.confirm(

@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // Initialize the Google Generative AI client
-const genAI = new GoogleGenerativeAI("AIzaSyBh3rKQx5f0baG_uesFUnx0MPKZRDwUMjQ");
+const genAI = new GoogleGenerativeAI(`${process.env.GOOGLE_AI_API_KEY}`);
 
 export async function POST(req: NextRequest) {
     const { chat_session_id, chatbot_id, content, name, created_at } = await req.json();

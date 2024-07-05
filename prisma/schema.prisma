@@ -1,0 +1,52 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Chat_sessions {
+  id         Int       @id @default(autoincrement())
+  chatbot_id Int?
+  created_at DateTime
+  guest_id   Int?
+  chatbot    Chatbots? @relation(fields: [chatbot_id], references: [id])
+  guest      Guests?   @relation(fields: [guest_id], references: [id])
+  messages   Messages[]
+}
+
+model Chatbot_characteristics {
+  id         Int      @id @default(autoincrement())
+  chatbot_id Int?
+  content    String
+  created_at DateTime
+  chatbot    Chatbots? @relation(fields: [chatbot_id], references: [id])
+}
+
+model Chatbots {
+  id                      Int                       @id @default(autoincrement())
+  clerk_user_id           String
+  created_at              DateTime
+  name                    String
+  chat_sessions           Chat_sessions[]
+  chatbot_characteristics Chatbot_characteristics[]
+}
+
+model Guests {
+  id            Int             @id @default(autoincrement())
+  created_at    DateTime
+  email         String?
+  name          String?
+  chat_sessions Chat_sessions[]
+}
+
+model Messages {
+  id              Int           @id @default(autoincrement())
+  chat_session_id Int?
+  content         String
+  created_at      DateTime
+  sender          String
+  chat_session    Chat_sessions? @relation(fields: [chat_session_id], references: [id])
+}
