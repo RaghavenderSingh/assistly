@@ -80,7 +80,7 @@ async function ViewChatbots() {
                   ))}
                 </ul>
                 <h3 className="italic">No of Sessions:</h3>
-                <p>{chatbots.chat_session?.length}</p>
+                <p>{chatbots.chat_sessions?.length}</p>
               </div>
             </li>
           </Link>
