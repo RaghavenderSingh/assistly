@@ -52,7 +52,7 @@ async function ViewChatbots() {
 
       <ul className="flex flex-col space-y-5">
         {sortedChatbotByUser.map((chatbots) => (
-          <Link href={`/edit-chatbot/${chatbots.id}`}>
+          <Link key={chatbots.id} href={`/edit-chatbot/${chatbots.id}`}>
             <li className="relative p-10 border rounded-md max-w-3xl bg-white">
               <div className="flex justify-center items-center">
                 <div className="flex items-center space-x-4">
@@ -65,23 +65,22 @@ async function ViewChatbots() {
               </div>
               <hr className="mt-2" />
               <div className="grid grid-cols-2 gap-10 md:gap-5 p-5">
-              <h3 className="italic">Characteristics:</h3>
-              <ul className="text-xs">
-                {
-                    !chatbots.chatbot_characteristics.length&& (
-                        <p>No characteristics added yet.</p>
-                    )
-                }
-                {
-                    chatbots.chatbot_characteristics.map((characteristic)=>(
-                        <li className="list-disc break-words" key={characteristic.id}>
-                            {characteristic.content}
-                        </li>
-                    ))
-                }
-              </ul>
-              <h3 className="italic">No of Sessions:</h3>
-              <p>{chatbots.chat_session?.length}</p>
+                <h3 className="italic">Characteristics:</h3>
+                <ul className="text-xs">
+                  {!chatbots.chatbot_characteristics.length && (
+                    <p>No characteristics added yet.</p>
+                  )}
+                  {chatbots.chatbot_characteristics.map((characteristic) => (
+                    <li
+                      className="list-disc break-words"
+                      key={characteristic.id}
+                    >
+                      {characteristic.content}
+                    </li>
+                  ))}
+                </ul>
+                <h3 className="italic">No of Sessions:</h3>
+                <p>{chatbots.chat_session?.length}</p>
               </div>
             </li>
           </Link>
