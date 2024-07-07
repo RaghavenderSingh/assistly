@@ -1,5 +1,5 @@
 import { ApolloClient, DefaultOptions, InMemoryCache, createHttpLink } from '@apollo/client';
-export const BASE_URL = process.env.NODE_ENV !== "development" ? `http://${process.env.DEV_URL}` : "http://localhost:3000/";
+export const BASE_URL = process.env.NODE_ENV !== "development" ? `${process.env.DEV_URL}` : "http://localhost:3000/";
 const httpsLink = createHttpLink({ uri: `${BASE_URL}/api/graphql`, });
 const defaultOptions: DefaultOptions = {
     watchQuery: {
