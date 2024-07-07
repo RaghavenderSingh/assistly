@@ -1,6 +1,6 @@
 import { ApolloClient, DefaultOptions, InMemoryCache, createHttpLink } from '@apollo/client';
 export const BASE_URL = process.env.NODE_ENV !== "development" ? `${process.env.DEV_URL}` : "http://localhost:3000/";
-const httpsLink = createHttpLink({ uri: `${BASE_URL}/api/graphql`, });
+const httpsLink = createHttpLink({ uri: `https://assistly-git-main-raghavendersinghs-projects.vercel.app/api/graphql`, });
 const defaultOptions: DefaultOptions = {
     watchQuery: {
         fetchPolicy: "no-cache",
